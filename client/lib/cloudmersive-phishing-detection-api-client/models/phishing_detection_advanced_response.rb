@@ -1,7 +1,7 @@
 =begin
 #phishingapi
 
-#Easily and directly scan and block phishing security threats.
+#Easily and directly scan and block phishing security threats in input.
 
 OpenAPI spec version: v1
 
@@ -13,22 +13,32 @@ Swagger Codegen version: 2.4.14
 require 'date'
 
 module CloudmersivePhishingDetectionApiClient
-  # Request data for the basic phishing validation apis
-  class PhishingUrlRequest
-    # Full url to be evaluated
-    attr_accessor :url
+  # Result of detecting phishing using AI
+  class PhishingDetectionAdvancedResponse
+    # True if the result is not phishing (clean), and false otherwise
+    attr_accessor :clean_result
+
+    # Overall phishing risk level between 0.0 and 1.0
+    attr_accessor :phishing_risk_level
+
+    # Rationale for why the conclusion was formed
+    attr_accessor :analysis_rationale
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'url' => :'Url'
+        :'clean_result' => :'CleanResult',
+        :'phishing_risk_level' => :'PhishingRiskLevel',
+        :'analysis_rationale' => :'AnalysisRationale'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'url' => :'String'
+        :'clean_result' => :'BOOLEAN',
+        :'phishing_risk_level' => :'Float',
+        :'analysis_rationale' => :'String'
       }
     end
 
@@ -40,8 +50,16 @@ module CloudmersivePhishingDetectionApiClient
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'Url')
-        self.url = attributes[:'Url']
+      if attributes.has_key?(:'CleanResult')
+        self.clean_result = attributes[:'CleanResult']
+      end
+
+      if attributes.has_key?(:'PhishingRiskLevel')
+        self.phishing_risk_level = attributes[:'PhishingRiskLevel']
+      end
+
+      if attributes.has_key?(:'AnalysisRationale')
+        self.analysis_rationale = attributes[:'AnalysisRationale']
       end
     end
 
@@ -49,17 +67,12 @@ module CloudmersivePhishingDetectionApiClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @url.nil?
-        invalid_properties.push('invalid value for "url", url cannot be nil.')
-      end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @url.nil?
       true
     end
 
@@ -68,7 +81,9 @@ module CloudmersivePhishingDetectionApiClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          url == o.url
+          clean_result == o.clean_result &&
+          phishing_risk_level == o.phishing_risk_level &&
+          analysis_rationale == o.analysis_rationale
     end
 
     # @see the `==` method
@@ -80,7 +95,7 @@ module CloudmersivePhishingDetectionApiClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [url].hash
+      [clean_result, phishing_risk_level, analysis_rationale].hash
     end
 
     # Builds the object from hash

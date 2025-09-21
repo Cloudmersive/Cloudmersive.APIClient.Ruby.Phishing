@@ -1,7 +1,7 @@
 =begin
 #phishingapi
 
-#Easily and directly scan and block phishing security threats.
+#Easily and directly scan and block phishing security threats in input.
 
 OpenAPI spec version: v1
 
@@ -13,27 +13,51 @@ Swagger Codegen version: 2.4.14
 require 'date'
 
 module CloudmersivePhishingDetectionApiClient
-  # Responses for the batch calls to Phishing Url
-  class PhishingUrlResponseBatch
-    # Specifies if all the urls (or its hosts or domains) in this batch call passed all the checks or not.
-    attr_accessor :clean_result
+  # Request to detect phishing from an email
+  class AdvancedEmailDetectionRequest
+    # Email address of the sender
+    attr_accessor :from_email_address
 
-    # Dictionary where the requesting url is the key and the value is the resulting validation
-    attr_accessor :url_responses
+    # Email address of the recipient
+    attr_accessor :to_email_address
+
+    # Subject of the email
+    attr_accessor :subject
+
+    # Body of the email in HTML, or text
+    attr_accessor :html_body
+
+    # Allow email from low reputation senders and domains
+    attr_accessor :allow_low_reputation_senders
+
+    # True to allow sanctioned countries and certain known sanctioned entities, false otherwise (default)
+    attr_accessor :allow_sanctioned
+
+    attr_accessor :input_email_file
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'clean_result' => :'CleanResult',
-        :'url_responses' => :'UrlResponses'
+        :'from_email_address' => :'FromEmailAddress',
+        :'to_email_address' => :'ToEmailAddress',
+        :'subject' => :'Subject',
+        :'html_body' => :'HtmlBody',
+        :'allow_low_reputation_senders' => :'AllowLowReputationSenders',
+        :'allow_sanctioned' => :'AllowSanctioned',
+        :'input_email_file' => :'InputEmailFile'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'clean_result' => :'BOOLEAN',
-        :'url_responses' => :'Array<PhishingUrlResponse>'
+        :'from_email_address' => :'String',
+        :'to_email_address' => :'String',
+        :'subject' => :'String',
+        :'html_body' => :'String',
+        :'allow_low_reputation_senders' => :'BOOLEAN',
+        :'allow_sanctioned' => :'BOOLEAN',
+        :'input_email_file' => :'String'
       }
     end
 
@@ -45,14 +69,32 @@ module CloudmersivePhishingDetectionApiClient
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'CleanResult')
-        self.clean_result = attributes[:'CleanResult']
+      if attributes.has_key?(:'FromEmailAddress')
+        self.from_email_address = attributes[:'FromEmailAddress']
       end
 
-      if attributes.has_key?(:'UrlResponses')
-        if (value = attributes[:'UrlResponses']).is_a?(Array)
-          self.url_responses = value
-        end
+      if attributes.has_key?(:'ToEmailAddress')
+        self.to_email_address = attributes[:'ToEmailAddress']
+      end
+
+      if attributes.has_key?(:'Subject')
+        self.subject = attributes[:'Subject']
+      end
+
+      if attributes.has_key?(:'HtmlBody')
+        self.html_body = attributes[:'HtmlBody']
+      end
+
+      if attributes.has_key?(:'AllowLowReputationSenders')
+        self.allow_low_reputation_senders = attributes[:'AllowLowReputationSenders']
+      end
+
+      if attributes.has_key?(:'AllowSanctioned')
+        self.allow_sanctioned = attributes[:'AllowSanctioned']
+      end
+
+      if attributes.has_key?(:'InputEmailFile')
+        self.input_email_file = attributes[:'InputEmailFile']
       end
     end
 
@@ -60,13 +102,28 @@ module CloudmersivePhishingDetectionApiClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if !@input_email_file.nil? && @input_email_file !~ Regexp.new(/^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$/)
+        invalid_properties.push('invalid value for "input_email_file", must conform to the pattern /^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$/.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
+      return false if !@input_email_file.nil? && @input_email_file !~ Regexp.new(/^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$/)
       true
+    end
+
+    # Custom attribute writer method with validation
+    # @param [Object] input_email_file Value to be assigned
+    def input_email_file=(input_email_file)
+      if !input_email_file.nil? && input_email_file !~ Regexp.new(/^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$/)
+        fail ArgumentError, 'invalid value for "input_email_file", must conform to the pattern /^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$/.'
+      end
+
+      @input_email_file = input_email_file
     end
 
     # Checks equality by comparing each attribute.
@@ -74,8 +131,13 @@ module CloudmersivePhishingDetectionApiClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          clean_result == o.clean_result &&
-          url_responses == o.url_responses
+          from_email_address == o.from_email_address &&
+          to_email_address == o.to_email_address &&
+          subject == o.subject &&
+          html_body == o.html_body &&
+          allow_low_reputation_senders == o.allow_low_reputation_senders &&
+          allow_sanctioned == o.allow_sanctioned &&
+          input_email_file == o.input_email_file
     end
 
     # @see the `==` method
@@ -87,7 +149,7 @@ module CloudmersivePhishingDetectionApiClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [clean_result, url_responses].hash
+      [from_email_address, to_email_address, subject, html_body, allow_low_reputation_senders, allow_sanctioned, input_email_file].hash
     end
 
     # Builds the object from hash

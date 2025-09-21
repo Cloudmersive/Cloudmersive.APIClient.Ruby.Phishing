@@ -1,7 +1,7 @@
 =begin
 #phishingapi
 
-#Easily and directly scan and block phishing security threats.
+#Easily and directly scan and block phishing security threats in input.
 
 OpenAPI spec version: v1
 

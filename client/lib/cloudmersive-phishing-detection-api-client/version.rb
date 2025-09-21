@@ -1,7 +1,7 @@
 =begin
 #phishingapi
 
-#Easily and directly scan and block phishing security threats.
+#Easily and directly scan and block phishing security threats in input.
 
 OpenAPI spec version: v1
 
@@ -11,5 +11,5 @@ Swagger Codegen version: 2.4.14
 =end
 
 module CloudmersivePhishingDetectionApiClient
-  VERSION = '2.2.0'
+  VERSION = '2.2.1'
 end

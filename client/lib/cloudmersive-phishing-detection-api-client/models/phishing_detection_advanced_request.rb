@@ -1,7 +1,7 @@
 =begin
 #phishingapi
 
-#Easily and directly scan and block phishing security threats.
+#Easily and directly scan and block phishing security threats in input.
 
 OpenAPI spec version: v1
 
@@ -13,27 +13,27 @@ Swagger Codegen version: 2.4.14
 require 'date'
 
 module CloudmersivePhishingDetectionApiClient
-  # Responses for the advanced batch calls to Phishing Url
-  class PhishingUrlAdvancedResponseBatch
-    # Specifies if all the urls (or its hosts or domains) in this batch call passed all the checks or not.
-    attr_accessor :clean_result
+  # AI advanced phishing detection request
+  class PhishingDetectionAdvancedRequest
+    # Input text string to detect phishing against
+    attr_accessor :input_string
 
-    # Resulting URL validations
-    attr_accessor :url_responses
+    # Optional: Specify which AI model to use.  Possible choices are Normal and Advanced.  Default is Advanced.
+    attr_accessor :model
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'clean_result' => :'CleanResult',
-        :'url_responses' => :'UrlResponses'
+        :'input_string' => :'InputString',
+        :'model' => :'Model'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'clean_result' => :'BOOLEAN',
-        :'url_responses' => :'Array<PhishingUrlAdvancedResponse>'
+        :'input_string' => :'String',
+        :'model' => :'String'
       }
     end
 
@@ -45,14 +45,12 @@ module CloudmersivePhishingDetectionApiClient
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'CleanResult')
-        self.clean_result = attributes[:'CleanResult']
+      if attributes.has_key?(:'InputString')
+        self.input_string = attributes[:'InputString']
       end
 
-      if attributes.has_key?(:'UrlResponses')
-        if (value = attributes[:'UrlResponses']).is_a?(Array)
-          self.url_responses = value
-        end
+      if attributes.has_key?(:'Model')
+        self.model = attributes[:'Model']
       end
     end
 
@@ -74,8 +72,8 @@ module CloudmersivePhishingDetectionApiClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          clean_result == o.clean_result &&
-          url_responses == o.url_responses
+          input_string == o.input_string &&
+          model == o.model
     end
 
     # @see the `==` method
@@ -87,7 +85,7 @@ module CloudmersivePhishingDetectionApiClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [clean_result, url_responses].hash
+      [input_string, model].hash
     end
 
     # Builds the object from hash

@@ -1,7 +1,7 @@
 =begin
 #phishingapi
 
-#Easily and directly scan and block phishing security threats.
+#Easily and directly scan and block phishing security threats in input.
 
 OpenAPI spec version: v1
 
@@ -13,32 +13,22 @@ Swagger Codegen version: 2.4.14
 require 'date'
 
 module CloudmersivePhishingDetectionApiClient
-  # Request data for the advanced api batch request
-  class PhishingUrlAdvancedRequestBatch
-    # Collection of all urls to check
-    attr_accessor :urls
-
-    # The caller may specify a collection of   hosts or domains which are always considered safe.<br />  This is to allow internal sites to be marked as safe
-    attr_accessor :allow_list
-
-    # The caller may specify a collection of   hosts or domains which are always considered unsafe.<br />  This is to allow internal sites to be marked as safe
-    attr_accessor :block_list
+  # Result of detecting phishing using AI
+  class PhishingDetectionResponse
+    # True if the result is not phishing (clean), and false otherwise
+    attr_accessor :clean_result
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'urls' => :'Urls',
-        :'allow_list' => :'AllowList',
-        :'block_list' => :'BlockList'
+        :'clean_result' => :'CleanResult'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'urls' => :'Array<String>',
-        :'allow_list' => :'Array<String>',
-        :'block_list' => :'Array<String>'
+        :'clean_result' => :'BOOLEAN'
       }
     end
 
@@ -50,22 +40,8 @@ module CloudmersivePhishingDetectionApiClient
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'Urls')
-        if (value = attributes[:'Urls']).is_a?(Array)
-          self.urls = value
-        end
-      end
-
-      if attributes.has_key?(:'AllowList')
-        if (value = attributes[:'AllowList']).is_a?(Array)
-          self.allow_list = value
-        end
-      end
-
-      if attributes.has_key?(:'BlockList')
-        if (value = attributes[:'BlockList']).is_a?(Array)
-          self.block_list = value
-        end
+      if attributes.has_key?(:'CleanResult')
+        self.clean_result = attributes[:'CleanResult']
       end
     end
 
@@ -73,17 +49,12 @@ module CloudmersivePhishingDetectionApiClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @urls.nil?
-        invalid_properties.push('invalid value for "urls", urls cannot be nil.')
-      end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @urls.nil?
       true
     end
 
@@ -92,9 +63,7 @@ module CloudmersivePhishingDetectionApiClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          urls == o.urls &&
-          allow_list == o.allow_list &&
-          block_list == o.block_list
+          clean_result == o.clean_result
     end
 
     # @see the `==` method
@@ -106,7 +75,7 @@ module CloudmersivePhishingDetectionApiClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [urls, allow_list, block_list].hash
+      [clean_result].hash
     end
 
     # Builds the object from hash

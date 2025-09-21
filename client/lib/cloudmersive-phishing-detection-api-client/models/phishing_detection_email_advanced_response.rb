@@ -1,7 +1,7 @@
 =begin
 #phishingapi
 
-#Easily and directly scan and block phishing security threats.
+#Easily and directly scan and block phishing security threats in input.
 
 OpenAPI spec version: v1
 
@@ -13,35 +13,51 @@ Swagger Codegen version: 2.4.14
 require 'date'
 
 module CloudmersivePhishingDetectionApiClient
-  # Response for the phishing validation apis
-  class PhishingUrlResponse
-    # Specifies if the url (or its host or domain) passed all the checks or not.
+  # Result of detecting phishing using AI
+  class PhishingDetectionEmailAdvancedResponse
+    # True if the result is not phishing (clean), and false otherwise
     attr_accessor :clean_result
 
-    # Risk value from 0.0 - 1.0. Higher numbers are a higher risk  <br />Anything below 0.3 should be considered safe. Anything above 0.7 should be considered a significant risk. <br />  A score of 1.0 indicates the url, host, or domain failed significant safety checks.<br />  If a url passes all the tests for the basic api, the risk will be 0.7. If a url passes all the tests for the advanced api, the risk will be 0.2.
-    attr_accessor :risk
+    # Overall phishing risk level between 0.0 and 1.0
+    attr_accessor :phishing_risk_level
 
-    # Specifies if the full url with query parameters and fragment is a phishing threat  <br />The advanced api performs more checks on the full url.
-    attr_accessor :contains_threat_url
+    # Overall phishing spam level between 0.0 and 1.0
+    attr_accessor :spam_risk_level
 
-    # Specifies if the host of the url (i.e. ```mysite.hostingsite.com``` for a url of ```https://mysite.hostingsite.com/index.html```) is a phishing threat  <br />The advanced api performs more checks on the host
-    attr_accessor :contains_threat_host
+    # True if the input email is from a low reputation sender
+    attr_accessor :contains_low_reputation_sender
 
-    # Specifies if the registerable domain of the url (i.e. ```hostingsite.com``` for a url of ```https://mysite.hostingsite.com/index.html```) is a phishing threat  <br />The advanced api performs more checks on the domain
-    attr_accessor :contains_threat_domain
+    # True if the input email contains phishing threat risks, false otherwise
+    attr_accessor :contains_phishing
 
-    # Input URL that was scanned
-    attr_accessor :input_url
+    # True if the email contains phishing threat risks, false otherwise
+    attr_accessor :contains_spam
+
+    # True if the input email contains unsolicited sales, false otherwise
+    attr_accessor :contains_unsolicited_sales
+
+    # True if the input email contains promotional content, false otherwise
+    attr_accessor :contains_promotional_content
+
+    # True if the input email contains a phishing attempt, false otherwise
+    attr_accessor :contains_phishing_attempt
+
+    # Rationale for why the conclusion was formed
+    attr_accessor :analysis_rationale
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'clean_result' => :'CleanResult',
-        :'risk' => :'Risk',
-        :'contains_threat_url' => :'ContainsThreatUrl',
-        :'contains_threat_host' => :'ContainsThreatHost',
-        :'contains_threat_domain' => :'ContainsThreatDomain',
-        :'input_url' => :'InputUrl'
+        :'phishing_risk_level' => :'PhishingRiskLevel',
+        :'spam_risk_level' => :'SpamRiskLevel',
+        :'contains_low_reputation_sender' => :'ContainsLowReputationSender',
+        :'contains_phishing' => :'ContainsPhishing',
+        :'contains_spam' => :'ContainsSpam',
+        :'contains_unsolicited_sales' => :'ContainsUnsolicitedSales',
+        :'contains_promotional_content' => :'ContainsPromotionalContent',
+        :'contains_phishing_attempt' => :'ContainsPhishingAttempt',
+        :'analysis_rationale' => :'AnalysisRationale'
       }
     end
 
@@ -49,11 +65,15 @@ module CloudmersivePhishingDetectionApiClient
     def self.swagger_types
       {
         :'clean_result' => :'BOOLEAN',
-        :'risk' => :'Float',
-        :'contains_threat_url' => :'BOOLEAN',
-        :'contains_threat_host' => :'BOOLEAN',
-        :'contains_threat_domain' => :'BOOLEAN',
-        :'input_url' => :'String'
+        :'phishing_risk_level' => :'Float',
+        :'spam_risk_level' => :'Float',
+        :'contains_low_reputation_sender' => :'BOOLEAN',
+        :'contains_phishing' => :'BOOLEAN',
+        :'contains_spam' => :'BOOLEAN',
+        :'contains_unsolicited_sales' => :'BOOLEAN',
+        :'contains_promotional_content' => :'BOOLEAN',
+        :'contains_phishing_attempt' => :'BOOLEAN',
+        :'analysis_rationale' => :'String'
       }
     end
 
@@ -69,24 +89,40 @@ module CloudmersivePhishingDetectionApiClient
         self.clean_result = attributes[:'CleanResult']
       end
 
-      if attributes.has_key?(:'Risk')
-        self.risk = attributes[:'Risk']
+      if attributes.has_key?(:'PhishingRiskLevel')
+        self.phishing_risk_level = attributes[:'PhishingRiskLevel']
       end
 
-      if attributes.has_key?(:'ContainsThreatUrl')
-        self.contains_threat_url = attributes[:'ContainsThreatUrl']
+      if attributes.has_key?(:'SpamRiskLevel')
+        self.spam_risk_level = attributes[:'SpamRiskLevel']
       end
 
-      if attributes.has_key?(:'ContainsThreatHost')
-        self.contains_threat_host = attributes[:'ContainsThreatHost']
+      if attributes.has_key?(:'ContainsLowReputationSender')
+        self.contains_low_reputation_sender = attributes[:'ContainsLowReputationSender']
       end
 
-      if attributes.has_key?(:'ContainsThreatDomain')
-        self.contains_threat_domain = attributes[:'ContainsThreatDomain']
+      if attributes.has_key?(:'ContainsPhishing')
+        self.contains_phishing = attributes[:'ContainsPhishing']
       end
 
-      if attributes.has_key?(:'InputUrl')
-        self.input_url = attributes[:'InputUrl']
+      if attributes.has_key?(:'ContainsSpam')
+        self.contains_spam = attributes[:'ContainsSpam']
+      end
+
+      if attributes.has_key?(:'ContainsUnsolicitedSales')
+        self.contains_unsolicited_sales = attributes[:'ContainsUnsolicitedSales']
+      end
+
+      if attributes.has_key?(:'ContainsPromotionalContent')
+        self.contains_promotional_content = attributes[:'ContainsPromotionalContent']
+      end
+
+      if attributes.has_key?(:'ContainsPhishingAttempt')
+        self.contains_phishing_attempt = attributes[:'ContainsPhishingAttempt']
+      end
+
+      if attributes.has_key?(:'AnalysisRationale')
+        self.analysis_rationale = attributes[:'AnalysisRationale']
       end
     end
 
@@ -109,11 +145,15 @@ module CloudmersivePhishingDetectionApiClient
       return true if self.equal?(o)
       self.class == o.class &&
           clean_result == o.clean_result &&
-          risk == o.risk &&
-          contains_threat_url == o.contains_threat_url &&
-          contains_threat_host == o.contains_threat_host &&
-          contains_threat_domain == o.contains_threat_domain &&
-          input_url == o.input_url
+          phishing_risk_level == o.phishing_risk_level &&
+          spam_risk_level == o.spam_risk_level &&
+          contains_low_reputation_sender == o.contains_low_reputation_sender &&
+          contains_phishing == o.contains_phishing &&
+          contains_spam == o.contains_spam &&
+          contains_unsolicited_sales == o.contains_unsolicited_sales &&
+          contains_promotional_content == o.contains_promotional_content &&
+          contains_phishing_attempt == o.contains_phishing_attempt &&
+          analysis_rationale == o.analysis_rationale
     end
 
     # @see the `==` method
@@ -125,7 +165,7 @@ module CloudmersivePhishingDetectionApiClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [clean_result, risk, contains_threat_url, contains_threat_host, contains_threat_domain, input_url].hash
+      [clean_result, phishing_risk_level, spam_risk_level, contains_low_reputation_sender, contains_phishing, contains_spam, contains_unsolicited_sales, contains_promotional_content, contains_phishing_attempt, analysis_rationale].hash
     end
 
     # Builds the object from hash

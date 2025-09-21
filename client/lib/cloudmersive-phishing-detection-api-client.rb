@@ -1,7 +1,7 @@
 =begin
 #phishingapi
 
-#Easily and directly scan and block phishing security threats.
+#Easily and directly scan and block phishing security threats in input.
 
 OpenAPI spec version: v1
 
@@ -17,17 +17,14 @@ require 'cloudmersive-phishing-detection-api-client/version'
 require 'cloudmersive-phishing-detection-api-client/configuration'
 
 # Models
-require 'cloudmersive-phishing-detection-api-client/models/phishing_url_advanced_request'
-require 'cloudmersive-phishing-detection-api-client/models/phishing_url_advanced_request_batch'
-require 'cloudmersive-phishing-detection-api-client/models/phishing_url_advanced_response'
-require 'cloudmersive-phishing-detection-api-client/models/phishing_url_advanced_response_batch'
-require 'cloudmersive-phishing-detection-api-client/models/phishing_url_request'
-require 'cloudmersive-phishing-detection-api-client/models/phishing_url_response'
-require 'cloudmersive-phishing-detection-api-client/models/phishing_url_response_batch'
+require 'cloudmersive-phishing-detection-api-client/models/advanced_email_detection_request'
+require 'cloudmersive-phishing-detection-api-client/models/phishing_detection_advanced_request'
+require 'cloudmersive-phishing-detection-api-client/models/phishing_detection_advanced_response'
+require 'cloudmersive-phishing-detection-api-client/models/phishing_detection_email_advanced_response'
+require 'cloudmersive-phishing-detection-api-client/models/phishing_detection_response'
 
 # APIs
-require 'cloudmersive-phishing-detection-api-client/api/phishing_url_api'
-require 'cloudmersive-phishing-detection-api-client/api/phishing_url_batch_api'
+require 'cloudmersive-phishing-detection-api-client/api/phishing_detection_api'
 
 module CloudmersivePhishingDetectionApiClient
   class << self
