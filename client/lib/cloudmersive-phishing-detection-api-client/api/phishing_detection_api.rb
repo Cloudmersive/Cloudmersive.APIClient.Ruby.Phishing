@@ -70,6 +70,7 @@ module CloudmersivePhishingDetectionApiClient
     # Perform advanced AI phishing detection and classification against input text string.  Analyzes input content as well as embedded URLs with AI deep learning to detect phishing, phishing and other unsafe content.  Uses 25-100 API calls depending on model selected.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :model  (default to Advanced)
+    # @option opts [String] :custom_policy_id 
     # @option opts [File] :input_file 
     # @return [PhishingDetectionAdvancedResponse]
     def phishing_detect_file_advanced_post(opts = {})
@@ -80,6 +81,7 @@ module CloudmersivePhishingDetectionApiClient
     # Perform advanced AI phishing detection and classification against input text string.  Analyzes input content as well as embedded URLs with AI deep learning to detect phishing, phishing and other unsafe content.  Uses 25-100 API calls depending on model selected.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :model 
+    # @option opts [String] :custom_policy_id 
     # @option opts [File] :input_file 
     # @return [Array<(PhishingDetectionAdvancedResponse, Fixnum, Hash)>] PhishingDetectionAdvancedResponse data, response status code and response headers
     def phishing_detect_file_advanced_post_with_http_info(opts = {})
@@ -99,6 +101,7 @@ module CloudmersivePhishingDetectionApiClient
       # HTTP header 'Content-Type'
       header_params['Content-Type'] = @api_client.select_header_content_type(['multipart/form-data'])
       header_params[:'model'] = opts[:'model'] if !opts[:'model'].nil?
+      header_params[:'customPolicyId'] = opts[:'custom_policy_id'] if !opts[:'custom_policy_id'].nil?
 
       # form parameters
       form_params = {}
@@ -216,6 +219,54 @@ module CloudmersivePhishingDetectionApiClient
         :return_type => 'PhishingDetectionAdvancedResponse')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PhishingDetectionApi#phishing_detect_text_string_advanced_post\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+    # Perform advanced AI phishing detection and classification against an input URL.  Retrieves the URL content, checks for SSRF threats, and analyzes the page with AI deep learning to detect phishing and other unsafe content.  Uses 100-125 API calls.
+    # @param [Hash] opts the optional parameters
+    # @option opts [AdvancedUrlDetectionRequest] :body URL phishing detection request
+    # @return [PhishingDetectionUrlAdvancedResponse]
+    def phishing_detect_url_advanced_post(opts = {})
+      data, _status_code, _headers = phishing_detect_url_advanced_post_with_http_info(opts)
+      data
+    end
+
+    # Perform advanced AI phishing detection and classification against an input URL.  Retrieves the URL content, checks for SSRF threats, and analyzes the page with AI deep learning to detect phishing and other unsafe content.  Uses 100-125 API calls.
+    # @param [Hash] opts the optional parameters
+    # @option opts [AdvancedUrlDetectionRequest] :body URL phishing detection request
+    # @return [Array<(PhishingDetectionUrlAdvancedResponse, Fixnum, Hash)>] PhishingDetectionUrlAdvancedResponse data, response status code and response headers
+    def phishing_detect_url_advanced_post_with_http_info(opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: PhishingDetectionApi.phishing_detect_url_advanced_post ...'
+      end
+      # resource path
+      local_var_path = '/phishing/detect/url/advanced'
+
+      # query parameters
+      query_params = {}
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['text/plain', 'application/json', 'text/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json', 'text/json', 'application/*+json'])
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = @api_client.object_to_http_body(opts[:'body'])
+      auth_names = ['Apikey']
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'PhishingDetectionUrlAdvancedResponse')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: PhishingDetectionApi#phishing_detect_url_advanced_post\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

@@ -13,57 +13,57 @@ Swagger Codegen version: 2.4.14
 require 'date'
 
 module CloudmersivePhishingDetectionApiClient
-  # Request to detect phishing from an email
-  class AdvancedEmailDetectionRequest
-    # Email address of the sender
-    attr_accessor :from_email_address
+  # Result of detecting phishing from a URL using AI
+  class PhishingDetectionUrlAdvancedResponse
+    # True if the result is not phishing (clean), and false otherwise
+    attr_accessor :clean_result
 
-    # Email address of the recipient
-    attr_accessor :to_email_address
+    # Overall phishing risk level between 0.0 and 1.0
+    attr_accessor :phishing_risk_level
 
-    # Subject of the email
-    attr_accessor :subject
+    # True if the URL is an SSRF threat
+    attr_accessor :is_ssrf_threat
 
-    # Body of the email in HTML, or text
-    attr_accessor :html_body
+    # True if the URL contains phishing threat risks, false otherwise
+    attr_accessor :contains_phishing
 
-    # Allow email from low reputation senders and domains
-    attr_accessor :allow_low_reputation_senders
+    # True if the URL contains unsolicited sales, false otherwise
+    attr_accessor :contains_unsolicited_sales
 
-    # True to allow sanctioned countries and certain known sanctioned entities, false otherwise (default)
-    attr_accessor :allow_sanctioned
+    # True if the URL contains promotional content, false otherwise
+    attr_accessor :contains_promotional_content
 
-    # Apply a Custom Policy for Phishing Enforcement by providing the ID; to create a Custom Policy,  navigate to the Cloudmersive Management Portal and select Custom Policies.  Requires Managed Instance or Private Cloud
-    attr_accessor :custom_policy_id
+    # True if the URL contains a phishing attempt, false otherwise
+    attr_accessor :contains_phishing_attempt
 
-    # Optional: Input email file bytes (EML, PDF, etc.).  If not provided, HtmlBody will be used instead.
-    attr_accessor :input_email_file
+    # Rationale for why the conclusion was formed
+    attr_accessor :analysis_rationale
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'from_email_address' => :'FromEmailAddress',
-        :'to_email_address' => :'ToEmailAddress',
-        :'subject' => :'Subject',
-        :'html_body' => :'HtmlBody',
-        :'allow_low_reputation_senders' => :'AllowLowReputationSenders',
-        :'allow_sanctioned' => :'AllowSanctioned',
-        :'custom_policy_id' => :'CustomPolicyID',
-        :'input_email_file' => :'InputEmailFile'
+        :'clean_result' => :'CleanResult',
+        :'phishing_risk_level' => :'PhishingRiskLevel',
+        :'is_ssrf_threat' => :'IsSsrfThreat',
+        :'contains_phishing' => :'ContainsPhishing',
+        :'contains_unsolicited_sales' => :'ContainsUnsolicitedSales',
+        :'contains_promotional_content' => :'ContainsPromotionalContent',
+        :'contains_phishing_attempt' => :'ContainsPhishingAttempt',
+        :'analysis_rationale' => :'AnalysisRationale'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'from_email_address' => :'String',
-        :'to_email_address' => :'String',
-        :'subject' => :'String',
-        :'html_body' => :'String',
-        :'allow_low_reputation_senders' => :'BOOLEAN',
-        :'allow_sanctioned' => :'BOOLEAN',
-        :'custom_policy_id' => :'String',
-        :'input_email_file' => :'String'
+        :'clean_result' => :'BOOLEAN',
+        :'phishing_risk_level' => :'Float',
+        :'is_ssrf_threat' => :'BOOLEAN',
+        :'contains_phishing' => :'BOOLEAN',
+        :'contains_unsolicited_sales' => :'BOOLEAN',
+        :'contains_promotional_content' => :'BOOLEAN',
+        :'contains_phishing_attempt' => :'BOOLEAN',
+        :'analysis_rationale' => :'String'
       }
     end
 
@@ -75,36 +75,36 @@ module CloudmersivePhishingDetectionApiClient
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'FromEmailAddress')
-        self.from_email_address = attributes[:'FromEmailAddress']
+      if attributes.has_key?(:'CleanResult')
+        self.clean_result = attributes[:'CleanResult']
       end
 
-      if attributes.has_key?(:'ToEmailAddress')
-        self.to_email_address = attributes[:'ToEmailAddress']
+      if attributes.has_key?(:'PhishingRiskLevel')
+        self.phishing_risk_level = attributes[:'PhishingRiskLevel']
       end
 
-      if attributes.has_key?(:'Subject')
-        self.subject = attributes[:'Subject']
+      if attributes.has_key?(:'IsSsrfThreat')
+        self.is_ssrf_threat = attributes[:'IsSsrfThreat']
       end
 
-      if attributes.has_key?(:'HtmlBody')
-        self.html_body = attributes[:'HtmlBody']
+      if attributes.has_key?(:'ContainsPhishing')
+        self.contains_phishing = attributes[:'ContainsPhishing']
       end
 
-      if attributes.has_key?(:'AllowLowReputationSenders')
-        self.allow_low_reputation_senders = attributes[:'AllowLowReputationSenders']
+      if attributes.has_key?(:'ContainsUnsolicitedSales')
+        self.contains_unsolicited_sales = attributes[:'ContainsUnsolicitedSales']
       end
 
-      if attributes.has_key?(:'AllowSanctioned')
-        self.allow_sanctioned = attributes[:'AllowSanctioned']
+      if attributes.has_key?(:'ContainsPromotionalContent')
+        self.contains_promotional_content = attributes[:'ContainsPromotionalContent']
       end
 
-      if attributes.has_key?(:'CustomPolicyID')
-        self.custom_policy_id = attributes[:'CustomPolicyID']
+      if attributes.has_key?(:'ContainsPhishingAttempt')
+        self.contains_phishing_attempt = attributes[:'ContainsPhishingAttempt']
       end
 
-      if attributes.has_key?(:'InputEmailFile')
-        self.input_email_file = attributes[:'InputEmailFile']
+      if attributes.has_key?(:'AnalysisRationale')
+        self.analysis_rationale = attributes[:'AnalysisRationale']
       end
     end
 
@@ -112,28 +112,13 @@ module CloudmersivePhishingDetectionApiClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if !@input_email_file.nil? && @input_email_file !~ Regexp.new(/^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$/)
-        invalid_properties.push('invalid value for "input_email_file", must conform to the pattern /^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$/.')
-      end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@input_email_file.nil? && @input_email_file !~ Regexp.new(/^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$/)
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] input_email_file Value to be assigned
-    def input_email_file=(input_email_file)
-      if !input_email_file.nil? && input_email_file !~ Regexp.new(/^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$/)
-        fail ArgumentError, 'invalid value for "input_email_file", must conform to the pattern /^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$/.'
-      end
-
-      @input_email_file = input_email_file
     end
 
     # Checks equality by comparing each attribute.
@@ -141,14 +126,14 @@ module CloudmersivePhishingDetectionApiClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          from_email_address == o.from_email_address &&
-          to_email_address == o.to_email_address &&
-          subject == o.subject &&
-          html_body == o.html_body &&
-          allow_low_reputation_senders == o.allow_low_reputation_senders &&
-          allow_sanctioned == o.allow_sanctioned &&
-          custom_policy_id == o.custom_policy_id &&
-          input_email_file == o.input_email_file
+          clean_result == o.clean_result &&
+          phishing_risk_level == o.phishing_risk_level &&
+          is_ssrf_threat == o.is_ssrf_threat &&
+          contains_phishing == o.contains_phishing &&
+          contains_unsolicited_sales == o.contains_unsolicited_sales &&
+          contains_promotional_content == o.contains_promotional_content &&
+          contains_phishing_attempt == o.contains_phishing_attempt &&
+          analysis_rationale == o.analysis_rationale
     end
 
     # @see the `==` method
@@ -160,7 +145,7 @@ module CloudmersivePhishingDetectionApiClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [from_email_address, to_email_address, subject, html_body, allow_low_reputation_senders, allow_sanctioned, custom_policy_id, input_email_file].hash
+      [clean_result, phishing_risk_level, is_ssrf_threat, contains_phishing, contains_unsolicited_sales, contains_promotional_content, contains_phishing_attempt, analysis_rationale].hash
     end
 
     # Builds the object from hash

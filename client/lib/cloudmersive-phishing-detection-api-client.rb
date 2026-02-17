@@ -18,10 +18,12 @@ require 'cloudmersive-phishing-detection-api-client/configuration'
 
 # Models
 require 'cloudmersive-phishing-detection-api-client/models/advanced_email_detection_request'
+require 'cloudmersive-phishing-detection-api-client/models/advanced_url_detection_request'
 require 'cloudmersive-phishing-detection-api-client/models/phishing_detection_advanced_request'
 require 'cloudmersive-phishing-detection-api-client/models/phishing_detection_advanced_response'
 require 'cloudmersive-phishing-detection-api-client/models/phishing_detection_email_advanced_response'
 require 'cloudmersive-phishing-detection-api-client/models/phishing_detection_response'
+require 'cloudmersive-phishing-detection-api-client/models/phishing_detection_url_advanced_response'
 
 # APIs
 require 'cloudmersive-phishing-detection-api-client/api/phishing_detection_api'

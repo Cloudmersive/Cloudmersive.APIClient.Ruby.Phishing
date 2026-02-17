@@ -21,11 +21,47 @@ module CloudmersivePhishingDetectionApiClient
     # Optional: Specify which AI model to use.  Possible choices are Normal and Advanced.  Default is Advanced.
     attr_accessor :model
 
+    # Apply a Custom Policy for Phishing Enforcement by providing the ID; to create a Custom Policy,  navigate to the Cloudmersive Management Portal and select Custom Policies.  Requires Managed Instance or Private Cloud
+    attr_accessor :custom_policy_id
+
+    # Optional: Set to true to include an analysis rationale in the response explaining why the content was or was not flagged.  Default is true.
+    attr_accessor :provide_analysis_rationale
+
+    # Optional: Type of text being analyzed. Must be one of: \"Text Message\", \"User Message\", \"Sales Lead\", \"Email Message\", \"Support Case\", \"Other\".
+    attr_accessor :text_type
+
+    # Optional: Name of the sender
+    attr_accessor :from_name
+
+    # Optional: Name of the recipient
+    attr_accessor :to_name
+
+    # Optional: Phone number of the sender
+    attr_accessor :from_phone_number
+
+    # Optional: Phone number of the recipient
+    attr_accessor :to_phone_number
+
+    # Optional: Email address of the sender
+    attr_accessor :from_email_address
+
+    # Optional: Email address of the recipient
+    attr_accessor :to_email_address
+
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'input_string' => :'InputString',
-        :'model' => :'Model'
+        :'model' => :'Model',
+        :'custom_policy_id' => :'CustomPolicyID',
+        :'provide_analysis_rationale' => :'ProvideAnalysisRationale',
+        :'text_type' => :'TextType',
+        :'from_name' => :'FromName',
+        :'to_name' => :'ToName',
+        :'from_phone_number' => :'FromPhoneNumber',
+        :'to_phone_number' => :'ToPhoneNumber',
+        :'from_email_address' => :'FromEmailAddress',
+        :'to_email_address' => :'ToEmailAddress'
       }
     end
 
@@ -33,7 +69,16 @@ module CloudmersivePhishingDetectionApiClient
     def self.swagger_types
       {
         :'input_string' => :'String',
-        :'model' => :'String'
+        :'model' => :'String',
+        :'custom_policy_id' => :'String',
+        :'provide_analysis_rationale' => :'BOOLEAN',
+        :'text_type' => :'String',
+        :'from_name' => :'String',
+        :'to_name' => :'String',
+        :'from_phone_number' => :'String',
+        :'to_phone_number' => :'String',
+        :'from_email_address' => :'String',
+        :'to_email_address' => :'String'
       }
     end
 
@@ -51,6 +96,42 @@ module CloudmersivePhishingDetectionApiClient
 
       if attributes.has_key?(:'Model')
         self.model = attributes[:'Model']
+      end
+
+      if attributes.has_key?(:'CustomPolicyID')
+        self.custom_policy_id = attributes[:'CustomPolicyID']
+      end
+
+      if attributes.has_key?(:'ProvideAnalysisRationale')
+        self.provide_analysis_rationale = attributes[:'ProvideAnalysisRationale']
+      end
+
+      if attributes.has_key?(:'TextType')
+        self.text_type = attributes[:'TextType']
+      end
+
+      if attributes.has_key?(:'FromName')
+        self.from_name = attributes[:'FromName']
+      end
+
+      if attributes.has_key?(:'ToName')
+        self.to_name = attributes[:'ToName']
+      end
+
+      if attributes.has_key?(:'FromPhoneNumber')
+        self.from_phone_number = attributes[:'FromPhoneNumber']
+      end
+
+      if attributes.has_key?(:'ToPhoneNumber')
+        self.to_phone_number = attributes[:'ToPhoneNumber']
+      end
+
+      if attributes.has_key?(:'FromEmailAddress')
+        self.from_email_address = attributes[:'FromEmailAddress']
+      end
+
+      if attributes.has_key?(:'ToEmailAddress')
+        self.to_email_address = attributes[:'ToEmailAddress']
       end
     end
 
@@ -73,7 +154,16 @@ module CloudmersivePhishingDetectionApiClient
       return true if self.equal?(o)
       self.class == o.class &&
           input_string == o.input_string &&
-          model == o.model
+          model == o.model &&
+          custom_policy_id == o.custom_policy_id &&
+          provide_analysis_rationale == o.provide_analysis_rationale &&
+          text_type == o.text_type &&
+          from_name == o.from_name &&
+          to_name == o.to_name &&
+          from_phone_number == o.from_phone_number &&
+          to_phone_number == o.to_phone_number &&
+          from_email_address == o.from_email_address &&
+          to_email_address == o.to_email_address
     end
 
     # @see the `==` method
@@ -85,7 +175,7 @@ module CloudmersivePhishingDetectionApiClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [input_string, model].hash
+      [input_string, model, custom_policy_id, provide_analysis_rationale, text_type, from_name, to_name, from_phone_number, to_phone_number, from_email_address, to_email_address].hash
     end
 
     # Builds the object from hash

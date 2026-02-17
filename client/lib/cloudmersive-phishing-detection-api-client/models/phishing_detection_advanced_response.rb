@@ -21,6 +21,9 @@ module CloudmersivePhishingDetectionApiClient
     # Overall phishing risk level between 0.0 and 1.0
     attr_accessor :phishing_risk_level
 
+    # Confidence level between 0.0 and 1.0 where values over 0.9 indicate high confidence
+    attr_accessor :confidence_level
+
     # Rationale for why the conclusion was formed
     attr_accessor :analysis_rationale
 
@@ -29,6 +32,7 @@ module CloudmersivePhishingDetectionApiClient
       {
         :'clean_result' => :'CleanResult',
         :'phishing_risk_level' => :'PhishingRiskLevel',
+        :'confidence_level' => :'ConfidenceLevel',
         :'analysis_rationale' => :'AnalysisRationale'
       }
     end
@@ -38,6 +42,7 @@ module CloudmersivePhishingDetectionApiClient
       {
         :'clean_result' => :'BOOLEAN',
         :'phishing_risk_level' => :'Float',
+        :'confidence_level' => :'Float',
         :'analysis_rationale' => :'String'
       }
     end
@@ -56,6 +61,10 @@ module CloudmersivePhishingDetectionApiClient
 
       if attributes.has_key?(:'PhishingRiskLevel')
         self.phishing_risk_level = attributes[:'PhishingRiskLevel']
+      end
+
+      if attributes.has_key?(:'ConfidenceLevel')
+        self.confidence_level = attributes[:'ConfidenceLevel']
       end
 
       if attributes.has_key?(:'AnalysisRationale')
@@ -83,6 +92,7 @@ module CloudmersivePhishingDetectionApiClient
       self.class == o.class &&
           clean_result == o.clean_result &&
           phishing_risk_level == o.phishing_risk_level &&
+          confidence_level == o.confidence_level &&
           analysis_rationale == o.analysis_rationale
     end
 
@@ -95,7 +105,7 @@ module CloudmersivePhishingDetectionApiClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [clean_result, phishing_risk_level, analysis_rationale].hash
+      [clean_result, phishing_risk_level, confidence_level, analysis_rationale].hash
     end
 
     # Builds the object from hash

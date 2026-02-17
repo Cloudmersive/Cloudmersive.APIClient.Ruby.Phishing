@@ -13,57 +13,27 @@ Swagger Codegen version: 2.4.14
 require 'date'
 
 module CloudmersivePhishingDetectionApiClient
-  # Request to detect phishing from an email
-  class AdvancedEmailDetectionRequest
-    # Email address of the sender
-    attr_accessor :from_email_address
-
-    # Email address of the recipient
-    attr_accessor :to_email_address
-
-    # Subject of the email
-    attr_accessor :subject
-
-    # Body of the email in HTML, or text
-    attr_accessor :html_body
-
-    # Allow email from low reputation senders and domains
-    attr_accessor :allow_low_reputation_senders
-
-    # True to allow sanctioned countries and certain known sanctioned entities, false otherwise (default)
-    attr_accessor :allow_sanctioned
+  # Request to detect phishing from a URL
+  class AdvancedUrlDetectionRequest
+    # URL to check for phishing
+    attr_accessor :url
 
     # Apply a Custom Policy for Phishing Enforcement by providing the ID; to create a Custom Policy,  navigate to the Cloudmersive Management Portal and select Custom Policies.  Requires Managed Instance or Private Cloud
     attr_accessor :custom_policy_id
 
-    # Optional: Input email file bytes (EML, PDF, etc.).  If not provided, HtmlBody will be used instead.
-    attr_accessor :input_email_file
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'from_email_address' => :'FromEmailAddress',
-        :'to_email_address' => :'ToEmailAddress',
-        :'subject' => :'Subject',
-        :'html_body' => :'HtmlBody',
-        :'allow_low_reputation_senders' => :'AllowLowReputationSenders',
-        :'allow_sanctioned' => :'AllowSanctioned',
-        :'custom_policy_id' => :'CustomPolicyID',
-        :'input_email_file' => :'InputEmailFile'
+        :'url' => :'Url',
+        :'custom_policy_id' => :'CustomPolicyID'
       }
     end
 
     # Attribute type mapping.
     def self.swagger_types
       {
-        :'from_email_address' => :'String',
-        :'to_email_address' => :'String',
-        :'subject' => :'String',
-        :'html_body' => :'String',
-        :'allow_low_reputation_senders' => :'BOOLEAN',
-        :'allow_sanctioned' => :'BOOLEAN',
-        :'custom_policy_id' => :'String',
-        :'input_email_file' => :'String'
+        :'url' => :'String',
+        :'custom_policy_id' => :'String'
       }
     end
 
@@ -75,36 +45,12 @@ module CloudmersivePhishingDetectionApiClient
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'FromEmailAddress')
-        self.from_email_address = attributes[:'FromEmailAddress']
-      end
-
-      if attributes.has_key?(:'ToEmailAddress')
-        self.to_email_address = attributes[:'ToEmailAddress']
-      end
-
-      if attributes.has_key?(:'Subject')
-        self.subject = attributes[:'Subject']
-      end
-
-      if attributes.has_key?(:'HtmlBody')
-        self.html_body = attributes[:'HtmlBody']
-      end
-
-      if attributes.has_key?(:'AllowLowReputationSenders')
-        self.allow_low_reputation_senders = attributes[:'AllowLowReputationSenders']
-      end
-
-      if attributes.has_key?(:'AllowSanctioned')
-        self.allow_sanctioned = attributes[:'AllowSanctioned']
+      if attributes.has_key?(:'Url')
+        self.url = attributes[:'Url']
       end
 
       if attributes.has_key?(:'CustomPolicyID')
         self.custom_policy_id = attributes[:'CustomPolicyID']
-      end
-
-      if attributes.has_key?(:'InputEmailFile')
-        self.input_email_file = attributes[:'InputEmailFile']
       end
     end
 
@@ -112,28 +58,13 @@ module CloudmersivePhishingDetectionApiClient
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if !@input_email_file.nil? && @input_email_file !~ Regexp.new(/^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$/)
-        invalid_properties.push('invalid value for "input_email_file", must conform to the pattern /^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$/.')
-      end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if !@input_email_file.nil? && @input_email_file !~ Regexp.new(/^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$/)
       true
-    end
-
-    # Custom attribute writer method with validation
-    # @param [Object] input_email_file Value to be assigned
-    def input_email_file=(input_email_file)
-      if !input_email_file.nil? && input_email_file !~ Regexp.new(/^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$/)
-        fail ArgumentError, 'invalid value for "input_email_file", must conform to the pattern /^(?:[A-Za-z0-9+\/]{4})*(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$/.'
-      end
-
-      @input_email_file = input_email_file
     end
 
     # Checks equality by comparing each attribute.
@@ -141,14 +72,8 @@ module CloudmersivePhishingDetectionApiClient
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          from_email_address == o.from_email_address &&
-          to_email_address == o.to_email_address &&
-          subject == o.subject &&
-          html_body == o.html_body &&
-          allow_low_reputation_senders == o.allow_low_reputation_senders &&
-          allow_sanctioned == o.allow_sanctioned &&
-          custom_policy_id == o.custom_policy_id &&
-          input_email_file == o.input_email_file
+          url == o.url &&
+          custom_policy_id == o.custom_policy_id
     end
 
     # @see the `==` method
@@ -160,7 +85,7 @@ module CloudmersivePhishingDetectionApiClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [from_email_address, to_email_address, subject, html_body, allow_low_reputation_senders, allow_sanctioned, custom_policy_id, input_email_file].hash
+      [url, custom_policy_id].hash
     end
 
     # Builds the object from hash

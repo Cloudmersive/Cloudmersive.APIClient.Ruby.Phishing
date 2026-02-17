@@ -47,6 +47,7 @@ describe 'PhishingDetectionApi' do
   # Perform advanced AI phishing detection and classification against input text string.  Analyzes input content as well as embedded URLs with AI deep learning to detect phishing, phishing and other unsafe content.  Uses 25-100 API calls depending on model selected.
   # @param [Hash] opts the optional parameters
   # @option opts [String] :model 
+  # @option opts [String] :custom_policy_id 
   # @option opts [File] :input_file 
   # @return [PhishingDetectionAdvancedResponse]
   describe 'phishing_detect_file_advanced_post test' do
@@ -73,6 +74,17 @@ describe 'PhishingDetectionApi' do
   # @option opts [PhishingDetectionAdvancedRequest] :body Phishing detection request
   # @return [PhishingDetectionAdvancedResponse]
   describe 'phishing_detect_text_string_advanced_post test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
+  # unit tests for phishing_detect_url_advanced_post
+  # Perform advanced AI phishing detection and classification against an input URL.  Retrieves the URL content, checks for SSRF threats, and analyzes the page with AI deep learning to detect phishing and other unsafe content.  Uses 100-125 API calls.
+  # @param [Hash] opts the optional parameters
+  # @option opts [AdvancedUrlDetectionRequest] :body URL phishing detection request
+  # @return [PhishingDetectionUrlAdvancedResponse]
+  describe 'phishing_detect_url_advanced_post test' do
     it 'should work' do
       # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
     end
