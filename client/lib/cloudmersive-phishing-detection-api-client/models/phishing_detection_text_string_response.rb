@@ -13,28 +13,10 @@ Swagger Codegen version: 2.4.14
 require 'date'
 
 module CloudmersivePhishingDetectionApiClient
-  # Result of detecting phishing using AI
-  class PhishingDetectionAdvancedResponse
+  # Result of detecting phishing using AI for basic text string analysis
+  class PhishingDetectionTextStringResponse
     # True if the result is not phishing (clean), and false otherwise
     attr_accessor :clean_result
-
-    # True if the input text contains a phishing attempt, false otherwise
-    attr_accessor :contains_phishing
-
-    # True if the input text contains unsolicited sales, false otherwise
-    attr_accessor :contains_unsolicited_sales
-
-    # True if the input text contains promotional content, false otherwise
-    attr_accessor :contains_promotional_content
-
-    # True if the input text contains web URLs, including homoglyph URLs and spaced-out URL workarounds
-    attr_accessor :contains_web_urls
-
-    # True if the input text contains phone numbers, including homoglyph digits and spaced-out or spelled-out workarounds
-    attr_accessor :contains_phone_numbers
-
-    # True if the input text contains email addresses, including homoglyph characters and obfuscated workarounds
-    attr_accessor :contains_email_addresses
 
     # Confidence level between 0.0 and 1.0 where values over 0.9 indicate high confidence
     attr_accessor :confidence_level
@@ -42,22 +24,12 @@ module CloudmersivePhishingDetectionApiClient
     # Rationale for why the conclusion was formed
     attr_accessor :analysis_rationale
 
-    # URLs detected in the input text that were analyzed and found to be unsafe. Only populated when ProvideUrlAnalysis is true and URLs are detected.
-    attr_accessor :unsafe_urls
-
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'clean_result' => :'CleanResult',
-        :'contains_phishing' => :'ContainsPhishing',
-        :'contains_unsolicited_sales' => :'ContainsUnsolicitedSales',
-        :'contains_promotional_content' => :'ContainsPromotionalContent',
-        :'contains_web_urls' => :'ContainsWebUrls',
-        :'contains_phone_numbers' => :'ContainsPhoneNumbers',
-        :'contains_email_addresses' => :'ContainsEmailAddresses',
         :'confidence_level' => :'ConfidenceLevel',
-        :'analysis_rationale' => :'AnalysisRationale',
-        :'unsafe_urls' => :'UnsafeUrls'
+        :'analysis_rationale' => :'AnalysisRationale'
       }
     end
 
@@ -65,15 +37,8 @@ module CloudmersivePhishingDetectionApiClient
     def self.swagger_types
       {
         :'clean_result' => :'BOOLEAN',
-        :'contains_phishing' => :'BOOLEAN',
-        :'contains_unsolicited_sales' => :'BOOLEAN',
-        :'contains_promotional_content' => :'BOOLEAN',
-        :'contains_web_urls' => :'BOOLEAN',
-        :'contains_phone_numbers' => :'BOOLEAN',
-        :'contains_email_addresses' => :'BOOLEAN',
         :'confidence_level' => :'Float',
-        :'analysis_rationale' => :'String',
-        :'unsafe_urls' => :'Array<UnsafeUrlResult>'
+        :'analysis_rationale' => :'String'
       }
     end
 
@@ -89,42 +54,12 @@ module CloudmersivePhishingDetectionApiClient
         self.clean_result = attributes[:'CleanResult']
       end
 
-      if attributes.has_key?(:'ContainsPhishing')
-        self.contains_phishing = attributes[:'ContainsPhishing']
-      end
-
-      if attributes.has_key?(:'ContainsUnsolicitedSales')
-        self.contains_unsolicited_sales = attributes[:'ContainsUnsolicitedSales']
-      end
-
-      if attributes.has_key?(:'ContainsPromotionalContent')
-        self.contains_promotional_content = attributes[:'ContainsPromotionalContent']
-      end
-
-      if attributes.has_key?(:'ContainsWebUrls')
-        self.contains_web_urls = attributes[:'ContainsWebUrls']
-      end
-
-      if attributes.has_key?(:'ContainsPhoneNumbers')
-        self.contains_phone_numbers = attributes[:'ContainsPhoneNumbers']
-      end
-
-      if attributes.has_key?(:'ContainsEmailAddresses')
-        self.contains_email_addresses = attributes[:'ContainsEmailAddresses']
-      end
-
       if attributes.has_key?(:'ConfidenceLevel')
         self.confidence_level = attributes[:'ConfidenceLevel']
       end
 
       if attributes.has_key?(:'AnalysisRationale')
         self.analysis_rationale = attributes[:'AnalysisRationale']
-      end
-
-      if attributes.has_key?(:'UnsafeUrls')
-        if (value = attributes[:'UnsafeUrls']).is_a?(Array)
-          self.unsafe_urls = value
-        end
       end
     end
 
@@ -147,15 +82,8 @@ module CloudmersivePhishingDetectionApiClient
       return true if self.equal?(o)
       self.class == o.class &&
           clean_result == o.clean_result &&
-          contains_phishing == o.contains_phishing &&
-          contains_unsolicited_sales == o.contains_unsolicited_sales &&
-          contains_promotional_content == o.contains_promotional_content &&
-          contains_web_urls == o.contains_web_urls &&
-          contains_phone_numbers == o.contains_phone_numbers &&
-          contains_email_addresses == o.contains_email_addresses &&
           confidence_level == o.confidence_level &&
-          analysis_rationale == o.analysis_rationale &&
-          unsafe_urls == o.unsafe_urls
+          analysis_rationale == o.analysis_rationale
     end
 
     # @see the `==` method
@@ -167,7 +95,7 @@ module CloudmersivePhishingDetectionApiClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [clean_result, contains_phishing, contains_unsolicited_sales, contains_promotional_content, contains_web_urls, contains_phone_numbers, contains_email_addresses, confidence_level, analysis_rationale, unsafe_urls].hash
+      [clean_result, confidence_level, analysis_rationale].hash
     end
 
     # Builds the object from hash

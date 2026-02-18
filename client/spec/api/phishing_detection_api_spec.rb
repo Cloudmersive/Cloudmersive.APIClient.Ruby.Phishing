@@ -79,6 +79,17 @@ describe 'PhishingDetectionApi' do
     end
   end
 
+  # unit tests for phishing_detect_text_string_post
+  # Perform AI phishing detection against input text string.  Returns a clean/not-clean result with confidence level and optional rationale.
+  # @param [Hash] opts the optional parameters
+  # @option opts [PhishingDetectionTextStringRequest] :body Phishing detection request
+  # @return [PhishingDetectionTextStringResponse]
+  describe 'phishing_detect_text_string_post test' do
+    it 'should work' do
+      # assertion here. ref: https://www.relishapp.com/rspec/rspec-expectations/docs/built-in-matchers
+    end
+  end
+
   # unit tests for phishing_detect_url_advanced_post
   # Perform advanced AI phishing detection and classification against an input URL.  Retrieves the URL content, checks for SSRF threats, and analyzes the page with AI deep learning to detect phishing and other unsafe content.  Uses 100-125 API calls.
   # @param [Hash] opts the optional parameters

@@ -23,7 +23,10 @@ require 'cloudmersive-phishing-detection-api-client/models/phishing_detection_ad
 require 'cloudmersive-phishing-detection-api-client/models/phishing_detection_advanced_response'
 require 'cloudmersive-phishing-detection-api-client/models/phishing_detection_email_advanced_response'
 require 'cloudmersive-phishing-detection-api-client/models/phishing_detection_response'
+require 'cloudmersive-phishing-detection-api-client/models/phishing_detection_text_string_request'
+require 'cloudmersive-phishing-detection-api-client/models/phishing_detection_text_string_response'
 require 'cloudmersive-phishing-detection-api-client/models/phishing_detection_url_advanced_response'
+require 'cloudmersive-phishing-detection-api-client/models/unsafe_url_result'
 
 # APIs
 require 'cloudmersive-phishing-detection-api-client/api/phishing_detection_api'
