@@ -26,6 +26,7 @@ require 'cloudmersive-phishing-detection-api-client/models/phishing_detection_re
 require 'cloudmersive-phishing-detection-api-client/models/phishing_detection_text_string_request'
 require 'cloudmersive-phishing-detection-api-client/models/phishing_detection_text_string_response'
 require 'cloudmersive-phishing-detection-api-client/models/phishing_detection_url_advanced_response'
+require 'cloudmersive-phishing-detection-api-client/models/prior_history_item'
 require 'cloudmersive-phishing-detection-api-client/models/unsafe_url_result'
 
 # APIs

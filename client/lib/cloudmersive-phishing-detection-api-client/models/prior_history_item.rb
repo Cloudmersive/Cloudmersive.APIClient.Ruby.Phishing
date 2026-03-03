@@ -13,40 +13,10 @@ Swagger Codegen version: 2.4.14
 require 'date'
 
 module CloudmersivePhishingDetectionApiClient
-  # AI advanced phishing detection request
-  class PhishingDetectionAdvancedRequest
-    # Input text string to detect phishing against
+  # A single message in the prior conversation history
+  class PriorHistoryItem
+    # The text content of this historical message
     attr_accessor :input_string
-
-    # Optional: Type of text being analyzed. Must be one of: \"TextMessage\", \"UserMessage\", \"SalesLead\", \"EmailMessage\", \"SupportCase\", \"AppMessage\", \"Other\".
-    attr_accessor :text_type
-
-    # Optional: Specify which AI model to use.  Possible choices are Normal and Advanced.  Default is Advanced.
-    attr_accessor :model
-
-    # Optional: True if unsolicited sales should be allowed, false otherwise. Defaults to true.
-    attr_accessor :allow_unsolicited_sales
-
-    # Optional: True if promotional content should be allowed, false otherwise. Defaults to true.
-    attr_accessor :allow_promotional_content
-
-    # Optional: True if web URLs should be allowed in the input text, false otherwise. Defaults to true. When false, input containing URLs (including homoglyph URLs and spaced-out URLs) will be flagged as not clean.
-    attr_accessor :allow_web_urls
-
-    # Optional: True if phone numbers should be allowed in the input text, false otherwise. Defaults to true. When false, input containing phone numbers (including homoglyph digits and spaced-out or spelled-out workarounds) will be flagged as not clean.
-    attr_accessor :allow_phone_numbers
-
-    # Optional: True if email addresses should be allowed in the input text, false otherwise. Defaults to true. When false, input containing email addresses (including homoglyph characters and obfuscated workarounds like \"danny at somedomaine [DOT] com\") will be flagged as not clean.
-    attr_accessor :allow_email_addresses
-
-    # Optional: True to perform deep URL analysis on any URLs detected in the text. When enabled, if the initial AI scan detects URLs, a second AI call enumerates them and each URL is individually analyzed for phishing. Defaults to true.
-    attr_accessor :provide_url_analysis
-
-    # Apply a Custom Policy for Phishing Enforcement by providing the ID; to create a Custom Policy,  navigate to the Cloudmersive Management Portal and select Custom Policies.  Requires Managed Instance or Private Cloud
-    attr_accessor :custom_policy_id
-
-    # Optional: Set to true to include an analysis rationale in the response explaining why the content was or was not flagged.  Default is true.
-    attr_accessor :provide_analysis_rationale
 
     # Optional: Name of the sender
     attr_accessor :from_name
@@ -66,30 +36,20 @@ module CloudmersivePhishingDetectionApiClient
     # Optional: Email address of the recipient
     attr_accessor :to_email_address
 
-    # Optional: Prior context history (e.g. message history) leading up to the current input string. If provided, the AI will take this history into account as context when evaluating the current input.
-    attr_accessor :prior_history
+    # Optional: True if this message is from a trusted party (such as our own company), false otherwise
+    attr_accessor :trusted_party
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
         :'input_string' => :'InputString',
-        :'text_type' => :'TextType',
-        :'model' => :'Model',
-        :'allow_unsolicited_sales' => :'AllowUnsolicitedSales',
-        :'allow_promotional_content' => :'AllowPromotionalContent',
-        :'allow_web_urls' => :'AllowWebUrls',
-        :'allow_phone_numbers' => :'AllowPhoneNumbers',
-        :'allow_email_addresses' => :'AllowEmailAddresses',
-        :'provide_url_analysis' => :'ProvideUrlAnalysis',
-        :'custom_policy_id' => :'CustomPolicyID',
-        :'provide_analysis_rationale' => :'ProvideAnalysisRationale',
         :'from_name' => :'FromName',
         :'to_name' => :'ToName',
         :'from_phone_number' => :'FromPhoneNumber',
         :'to_phone_number' => :'ToPhoneNumber',
         :'from_email_address' => :'FromEmailAddress',
         :'to_email_address' => :'ToEmailAddress',
-        :'prior_history' => :'PriorHistory'
+        :'trusted_party' => :'TrustedParty'
       }
     end
 
@@ -97,23 +57,13 @@ module CloudmersivePhishingDetectionApiClient
     def self.swagger_types
       {
         :'input_string' => :'String',
-        :'text_type' => :'String',
-        :'model' => :'String',
-        :'allow_unsolicited_sales' => :'BOOLEAN',
-        :'allow_promotional_content' => :'BOOLEAN',
-        :'allow_web_urls' => :'BOOLEAN',
-        :'allow_phone_numbers' => :'BOOLEAN',
-        :'allow_email_addresses' => :'BOOLEAN',
-        :'provide_url_analysis' => :'BOOLEAN',
-        :'custom_policy_id' => :'String',
-        :'provide_analysis_rationale' => :'BOOLEAN',
         :'from_name' => :'String',
         :'to_name' => :'String',
         :'from_phone_number' => :'String',
         :'to_phone_number' => :'String',
         :'from_email_address' => :'String',
         :'to_email_address' => :'String',
-        :'prior_history' => :'Array<PriorHistoryItem>'
+        :'trusted_party' => :'BOOLEAN'
       }
     end
 
@@ -127,46 +77,6 @@ module CloudmersivePhishingDetectionApiClient
 
       if attributes.has_key?(:'InputString')
         self.input_string = attributes[:'InputString']
-      end
-
-      if attributes.has_key?(:'TextType')
-        self.text_type = attributes[:'TextType']
-      end
-
-      if attributes.has_key?(:'Model')
-        self.model = attributes[:'Model']
-      end
-
-      if attributes.has_key?(:'AllowUnsolicitedSales')
-        self.allow_unsolicited_sales = attributes[:'AllowUnsolicitedSales']
-      end
-
-      if attributes.has_key?(:'AllowPromotionalContent')
-        self.allow_promotional_content = attributes[:'AllowPromotionalContent']
-      end
-
-      if attributes.has_key?(:'AllowWebUrls')
-        self.allow_web_urls = attributes[:'AllowWebUrls']
-      end
-
-      if attributes.has_key?(:'AllowPhoneNumbers')
-        self.allow_phone_numbers = attributes[:'AllowPhoneNumbers']
-      end
-
-      if attributes.has_key?(:'AllowEmailAddresses')
-        self.allow_email_addresses = attributes[:'AllowEmailAddresses']
-      end
-
-      if attributes.has_key?(:'ProvideUrlAnalysis')
-        self.provide_url_analysis = attributes[:'ProvideUrlAnalysis']
-      end
-
-      if attributes.has_key?(:'CustomPolicyID')
-        self.custom_policy_id = attributes[:'CustomPolicyID']
-      end
-
-      if attributes.has_key?(:'ProvideAnalysisRationale')
-        self.provide_analysis_rationale = attributes[:'ProvideAnalysisRationale']
       end
 
       if attributes.has_key?(:'FromName')
@@ -193,10 +103,8 @@ module CloudmersivePhishingDetectionApiClient
         self.to_email_address = attributes[:'ToEmailAddress']
       end
 
-      if attributes.has_key?(:'PriorHistory')
-        if (value = attributes[:'PriorHistory']).is_a?(Array)
-          self.prior_history = value
-        end
+      if attributes.has_key?(:'TrustedParty')
+        self.trusted_party = attributes[:'TrustedParty']
       end
     end
 
@@ -219,23 +127,13 @@ module CloudmersivePhishingDetectionApiClient
       return true if self.equal?(o)
       self.class == o.class &&
           input_string == o.input_string &&
-          text_type == o.text_type &&
-          model == o.model &&
-          allow_unsolicited_sales == o.allow_unsolicited_sales &&
-          allow_promotional_content == o.allow_promotional_content &&
-          allow_web_urls == o.allow_web_urls &&
-          allow_phone_numbers == o.allow_phone_numbers &&
-          allow_email_addresses == o.allow_email_addresses &&
-          provide_url_analysis == o.provide_url_analysis &&
-          custom_policy_id == o.custom_policy_id &&
-          provide_analysis_rationale == o.provide_analysis_rationale &&
           from_name == o.from_name &&
           to_name == o.to_name &&
           from_phone_number == o.from_phone_number &&
           to_phone_number == o.to_phone_number &&
           from_email_address == o.from_email_address &&
           to_email_address == o.to_email_address &&
-          prior_history == o.prior_history
+          trusted_party == o.trusted_party
     end
 
     # @see the `==` method
@@ -247,7 +145,7 @@ module CloudmersivePhishingDetectionApiClient
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [input_string, text_type, model, allow_unsolicited_sales, allow_promotional_content, allow_web_urls, allow_phone_numbers, allow_email_addresses, provide_url_analysis, custom_policy_id, provide_analysis_rationale, from_name, to_name, from_phone_number, to_phone_number, from_email_address, to_email_address, prior_history].hash
+      [input_string, from_name, to_name, from_phone_number, to_phone_number, from_email_address, to_email_address, trusted_party].hash
     end
 
     # Builds the object from hash

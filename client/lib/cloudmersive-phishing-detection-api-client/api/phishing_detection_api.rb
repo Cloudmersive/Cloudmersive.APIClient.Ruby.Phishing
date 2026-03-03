@@ -19,7 +19,7 @@ module CloudmersivePhishingDetectionApiClient
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
-    # Perform advanced AI phishing detection and classification against input email.  Analyzes input email as well as embedded URLs with AI deep learning to detect phishing, phishing and other unsafe content.  Uses 25-100 API calls depending on model selected.
+    # Perform advanced AI phishing detection and classification against input email.  Supports email input as a file (PDF, DOC, DOCX, XLS, XLSX, PPT, PPTX, HTML, EML, MSG, PNG, JPG, WEBP) or as an HTML body string.  Analyzes input email as well as embedded URLs with AI deep learning to detect phishing, phishing and other unsafe content.  Uses 25-100 API calls depending on model selected.
     # @param [Hash] opts the optional parameters
     # @option opts [AdvancedEmailDetectionRequest] :body Phishing detection request
     # @return [PhishingDetectionEmailAdvancedResponse]
@@ -28,7 +28,7 @@ module CloudmersivePhishingDetectionApiClient
       data
     end
 
-    # Perform advanced AI phishing detection and classification against input email.  Analyzes input email as well as embedded URLs with AI deep learning to detect phishing, phishing and other unsafe content.  Uses 25-100 API calls depending on model selected.
+    # Perform advanced AI phishing detection and classification against input email.  Supports email input as a file (PDF, DOC, DOCX, XLS, XLSX, PPT, PPTX, HTML, EML, MSG, PNG, JPG, WEBP) or as an HTML body string.  Analyzes input email as well as embedded URLs with AI deep learning to detect phishing, phishing and other unsafe content.  Uses 25-100 API calls depending on model selected.
     # @param [Hash] opts the optional parameters
     # @option opts [AdvancedEmailDetectionRequest] :body Phishing detection request
     # @return [Array<(PhishingDetectionEmailAdvancedResponse, Fixnum, Hash)>] PhishingDetectionEmailAdvancedResponse data, response status code and response headers
@@ -67,7 +67,7 @@ module CloudmersivePhishingDetectionApiClient
       end
       return data, status_code, headers
     end
-    # Perform advanced AI phishing detection and classification against input text string.  Analyzes input content as well as embedded URLs with AI deep learning to detect phishing, phishing and other unsafe content.  Uses 25-100 API calls depending on model selected.
+    # Perform advanced AI phishing detection and classification on an input image or document (PDF, DOC, DOCX, XLS, XLSX, PPT, PPTX, HTML, EML, MSG, PNG, JPG, WEBP).  Analyzes input content as well as embedded URLs with AI deep learning to detect phishing, phishing and other unsafe content.  Uses 25-100 API calls depending on model selected.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :model  (default to Advanced)
     # @option opts [String] :custom_policy_id 
@@ -78,7 +78,7 @@ module CloudmersivePhishingDetectionApiClient
       data
     end
 
-    # Perform advanced AI phishing detection and classification against input text string.  Analyzes input content as well as embedded URLs with AI deep learning to detect phishing, phishing and other unsafe content.  Uses 25-100 API calls depending on model selected.
+    # Perform advanced AI phishing detection and classification on an input image or document (PDF, DOC, DOCX, XLS, XLSX, PPT, PPTX, HTML, EML, MSG, PNG, JPG, WEBP).  Analyzes input content as well as embedded URLs with AI deep learning to detect phishing, phishing and other unsafe content.  Uses 25-100 API calls depending on model selected.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :model 
     # @option opts [String] :custom_policy_id 
@@ -122,7 +122,7 @@ module CloudmersivePhishingDetectionApiClient
       end
       return data, status_code, headers
     end
-    # Perform AI phishing detection and classification on an input image or document (PDF or DOCX).  Analyzes input content as well as embedded URLs with AI deep learnign to detect phishing and other unsafe content.  Uses 100-125 API calls depending on model selected.
+    # Perform AI phishing detection and classification on an input image or document (PDF, DOC, DOCX, XLS, XLSX, PPT, PPTX, HTML, EML, MSG, PNG, JPG, WEBP).  Analyzes input content as well as embedded URLs with AI deep learning to detect phishing and other unsafe content.  Uses 100-125 API calls depending on model selected.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :model Model to use; default setting is Advanced (default to Advanced)
     # @option opts [File] :input_file 
@@ -132,7 +132,7 @@ module CloudmersivePhishingDetectionApiClient
       data
     end
 
-    # Perform AI phishing detection and classification on an input image or document (PDF or DOCX).  Analyzes input content as well as embedded URLs with AI deep learnign to detect phishing and other unsafe content.  Uses 100-125 API calls depending on model selected.
+    # Perform AI phishing detection and classification on an input image or document (PDF, DOC, DOCX, XLS, XLSX, PPT, PPTX, HTML, EML, MSG, PNG, JPG, WEBP).  Analyzes input content as well as embedded URLs with AI deep learning to detect phishing and other unsafe content.  Uses 100-125 API calls depending on model selected.
     # @param [Hash] opts the optional parameters
     # @option opts [String] :model Model to use; default setting is Advanced
     # @option opts [File] :input_file 
@@ -174,7 +174,7 @@ module CloudmersivePhishingDetectionApiClient
       end
       return data, status_code, headers
     end
-    # Perform advanced AI phishing detection and classification against input text string.  Analyzes input content as well as embedded URLs with AI deep learnign to detect spam, phishing and other unsafe content.  Uses 25-100 API calls depending on model selected.
+    # Perform advanced AI phishing detection and classification against input text string.  Analyzes input content as well as embedded URLs with AI deep learning to detect spam, phishing and other unsafe content.  Uses 25-100 API calls depending on model selected.
     # @param [Hash] opts the optional parameters
     # @option opts [PhishingDetectionAdvancedRequest] :body Phishing detection request
     # @return [PhishingDetectionAdvancedResponse]
@@ -183,7 +183,7 @@ module CloudmersivePhishingDetectionApiClient
       data
     end
 
-    # Perform advanced AI phishing detection and classification against input text string.  Analyzes input content as well as embedded URLs with AI deep learnign to detect spam, phishing and other unsafe content.  Uses 25-100 API calls depending on model selected.
+    # Perform advanced AI phishing detection and classification against input text string.  Analyzes input content as well as embedded URLs with AI deep learning to detect spam, phishing and other unsafe content.  Uses 25-100 API calls depending on model selected.
     # @param [Hash] opts the optional parameters
     # @option opts [PhishingDetectionAdvancedRequest] :body Phishing detection request
     # @return [Array<(PhishingDetectionAdvancedResponse, Fixnum, Hash)>] PhishingDetectionAdvancedResponse data, response status code and response headers

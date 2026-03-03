@@ -20,5 +20,6 @@ Name | Type | Description | Notes
 **to_phone_number** | **String** | Optional: Phone number of the recipient | [optional] 
 **from_email_address** | **String** | Optional: Email address of the sender | [optional] 
 **to_email_address** | **String** | Optional: Email address of the recipient | [optional] 
+**prior_history** | [**Array&lt;PriorHistoryItem&gt;**](PriorHistoryItem.md) | Optional: Prior context history (e.g. message history) leading up to the current input string. If provided, the AI will take this history into account as context when evaluating the current input. | [optional] 
 
 
